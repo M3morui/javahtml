@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="nev">Név:</label>
+    <input type="text" id="nev">
+    <button onclick="kiirNev()">Kiírás</button>
+    <p id="nevKiiras"></p>
+
+    <label for="kor">Kor:</label>
+    <input type="text" id="kor">
+    <button onclick="EletkorEll()">Kiírás</button>
+    <p id="korell"></p>
+
+    <label for="jelszo">Jelszó:</label>
+    <input type="password" id="jelszo">
+    <label for="jelszo">Jelszó Újra:</label>
+    <input type="password" id="jelszou">
+    <button onclick="Password()">Kiírás</button>
+    <p id="pass"></p>
+
+    <form onsubmit="return ellenorzes()">
+        <label for="nev">Név:</label>
+        <input type="text" id="nevMezo">
+        <button type="submit">Küldés</button>
+    </form>
+    <p id="uresMezoFigyelmeztetes"></p>
+    <script>
+        function kiirNev(){
+            var nev = document.getElementById("nev").value;
+            document.getElementById("nevKiiras").innerText = "Üdv, " + nev + "!";
+        }
+
+        function EletkorEll(){
+            var kor = document.getElementById("kor").value;
+            if (kor < 18){
+                //document.getElementById("korell").innerText = "Nem múltál el 18.";
+                alert('Nem vagy még nagykorú!')
+            }
+
+            if (kor >= 18){
+                document.getElementById("korell").innerText = "Elmúltál 18.";
+                //alert('Mehetsz bulizni!')
+            }
+        }
+
+        function Password(){
+            var jelszo = document.getElementById("jelszo").value;
+            var jelszou = document.getElementById("jelszou").value;
+            if (jelszo == jelszou){
+                document.getElementById("pass").innerText = "Sikeres.";
+                //alert('Nem vagy még nagykorú!')
+            }
+
+            if (jelszo != jelszou){
+                //document.getElementById("pass").innerText = "Sikertelen";
+                alert('Valami nem stimmel!')
+            }
+        }
+
+        function ellenorzes(){
+            var nev = document.getElementById("nevMezo").value;
+            if(nev.trim() === ""){
+                document.getElementById("uresMezoFigyelmeztetes").innerText = "A név mező nem lehet üres!";
+                return false;
+            }
+            return true;
+        }
+    </script>
+    
+</body>
+</html>
