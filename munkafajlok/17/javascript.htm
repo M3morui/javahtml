@@ -1,0 +1,104 @@
+﻿<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+  <head>
+    <title> JavaScript alapok </title>
+    <meta name="Generator" content="EditPlus3">
+    <meta name="Author" content="Oktatóvideók Bt. - Kovács Bence">
+    <meta name="description" content="JavaScript alapok, űrlapok manipulálása">
+    <meta name="keywords" content="HTML, weblap, javascript, űrlap, form, oktatás">
+    <meta name="robots" content="all">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script language="JavaScript">
+
+      function ellenoriz_radiogomb() {
+        document.urlap.szavazat[0].checked=true;
+        document.urlap.szavazat[1].checked=true;
+        //document.urlap.szavazat[1].checked=false;
+
+        if (document.urlap.szavazat[0].checked) {
+          alert('Az első rádiógomb be van jelölve.');
+        }
+        else {
+          alert('Az első rádiógomb nincs bejelölve.');
+        }
+      }
+
+      function ellenoriz_checkbox() {
+        document.urlap.tobb[0].checked=true;
+        document.urlap.tobb[1].checked=true;
+        document.urlap.tobb[2].checked=false;
+
+        if (document.urlap.tobb[3].checked) {
+          alert('A negyedik checkbox be van jelölve.');
+        }
+        else {
+          alert('A negyedik checkbox nincs bejelölve.');
+        }
+      }
+
+      function ellenoriz_lista() {
+        document.urlap.szinek[2].selected=false;
+        document.urlap.szinek[0].selected=true;
+        document.urlap.szinek[1].selected=true;
+        document.urlap.szinek[3].selected=true;
+
+        if (document.urlap.szinek[3].selected) {
+          alert('A negyedik sor ki van választva.');
+        }
+        else {
+          alert('A negyedik sor nincs kiválasztva.');
+        }
+      }
+
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <form name="urlap">
+  
+        <br><br><br>
+        <b>Szerinted igen vagy nem? Szavazz!</b>&nbsp;&nbsp;
+        <input type="radio" name="szavazat" value="1"> igen
+        &nbsp;&nbsp;
+        <input type="radio" name="szavazat" value="0"> nem
+
+        <br><br><br>
+        
+        <b>Több választ is bejelölhetsz:</b><br><br>
+        <input type="checkbox" name="tobb" value="1"> hóember<br>
+        <input type="checkbox" name="tobb" value="2"> talán<br>
+        <input type="checkbox" name="tobb" value="3"> délelőtt<br>
+        <input type="checkbox" name="tobb" value="4"> délután<br>
+        <input type="checkbox" name="tobb" value="5"> mákostészta
+
+        <br><br><br>
+        
+        <b>Válassz egyet ezek közül:</b><br><br>
+        <select name="szinek" size="5" multiple>
+          <option value="1">narancs
+          <option value="2">alma
+          <option value="3">tenger
+          <option value="4">muhaha
+          <option value="5">bűvész
+        </select>
+
+        <br><br><br>
+
+        <input type="button" value="ellenőrzés" onClick="ellenoriz_lista()">
+
+
+      </p>
+
+    </form>
+
+
+
+  </body>
+
+</html>

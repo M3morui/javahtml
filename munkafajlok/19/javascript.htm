@@ -1,0 +1,87 @@
+﻿<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+  <head>
+    <title> JavaScript alapok </title>
+    <meta name="Generator" content="EditPlus3">
+    <meta name="Author" content="Oktatóvideók Bt. - Kovács Bence">
+    <meta name="description" content="JavaScript alapok, űrlapok manipulálása">
+    <meta name="keywords" content="HTML, weblap, javascript, űrlap, form, oktatás">
+    <meta name="robots" content="all">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script language="JavaScript">
+
+      function ellenoriz() {
+      
+        var rendben = true;
+        var cim = document.urlap.email.value;
+        var hossz = cim.length;
+
+        var kukac = cim.indexOf('@');
+
+        var kukac_utan = cim.substr(kukac+1,hossz-kukac-1);
+        var pont = kukac_utan.indexOf('.');
+        var utolso_pont = kukac_utan.lastIndexOf('.');
+
+        var utolso_resz_hossza = kukac_utan.length-utolso_pont-1;
+
+
+        if (hossz<7) {
+          rendben = false;
+        }
+        if (kukac<2) {
+          rendben = false;
+        }
+        if (pont<1) {
+          rendben = false;
+        }
+        if (utolso_resz_hossza<2 || utolso_resz_hossza>3) {
+          rendben = false;
+        }
+
+
+        if (rendben==false) {
+          alert('Az e-mail cím formátuma helytelen!');
+        }
+        else {
+          document.urlap.submit();
+        }
+
+        // kiss.janos@web.internet.hu
+
+        // az e-mail cím legalább 7 karakter hosszú
+        // a kukac előtt legalább 2 karakter legyen
+        // a kukac utáni részben az első pont előtt legalább 1 karakter legyen
+        // a kukac utáni részben az utolsó pont után 2 vagy 3 karakter legyen
+      
+      }
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <form name="urlap" action="feldolgozo.htm" method="POST">
+  
+        <br><br><br>
+        <b>e-mail cím:</b> <input name="email" style="width:200px">
+
+        <br><br><br>
+
+        <input type="button" value="ellenőrzés és elküldés" onClick="ellenoriz()">
+        &nbsp;&nbsp;&nbsp;
+        <input type="submit" value="elküldés">
+
+
+      </p>
+
+    </form>
+
+
+
+  </body>
+
+</html>

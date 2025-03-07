@@ -1,0 +1,227 @@
+﻿<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+  <head>
+    <title> JavaScript alapok </title>
+    <meta name="Generator" content="EditPlus3">
+    <meta name="Author" content="Oktatóvideók Bt. - Kovács Bence">
+    <meta name="description" content="JavaScript alapok, űrlapok manipulálása">
+    <meta name="keywords" content="HTML, weblap, javascript, űrlap, form, oktatás">
+    <meta name="robots" content="all">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script language="JavaScript">
+
+      function email_check() {
+      
+        var rendben = true;
+        var cim = document.urlap.email.value;
+        var hossz = cim.length;
+
+        var kukac = cim.indexOf('@');
+
+        var kukac_utan = cim.substr(kukac+1,hossz-kukac-1);
+        var pont = kukac_utan.indexOf('.');
+        var utolso_pont = kukac_utan.lastIndexOf('.');
+
+        var utolso_resz_hossza = kukac_utan.length-utolso_pont-1;
+
+        if (hossz<7) {
+          rendben = false;
+        }
+        if (kukac<2) {
+          rendben = false;
+        }
+        if (pont<1) {
+          rendben = false;
+        }
+        if (utolso_resz_hossza<2 || utolso_resz_hossza>3) {
+          rendben = false;
+        }
+
+        if (rendben) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      
+      }
+
+      function dijkalkulator() {
+        
+        var tandij = 0;
+        var lemezek = 0;
+
+        if (document.urlap.dw.checked) {
+          tandij += 4500;
+          lemezek += 1;
+        }
+        if (document.urlap.php.checked) {
+          tandij += 7400;
+          lemezek += 1;
+        }
+        if (document.urlap.poker.checked) {
+          tandij += 3700;
+          lemezek += 1;
+        }
+        if (document.urlap.trukk.checked) {
+          tandij += 3500;
+          lemezek += 1;
+        }
+        if (document.urlap.win.checked) {
+          tandij += 4100;
+          lemezek += 1;
+        }
+
+        if (document.urlap.letolti[1].checked) {
+          tandij += lemezek*500;
+          document.getElementById('postacim').style.display='';
+        }
+        else {
+          document.getElementById('postacim').style.display='none';
+        }
+        
+        document.urlap.fizetendo.value = tandij + ' Ft';
+ 
+      }
+
+      
+      function ellenoriz() {
+      
+        document.urlap.elkuld.disabled=true;
+        document.urlap.elkuld.value='Kis türelmet kérek, ellenőrzés folyamatban...';
+
+        var rendben;
+
+        if (document.urlap.dw.checked || document.urlap.php.checked || document.urlap.poker.checked || document.urlap.trukk.checked || document.urlap.win.checked) {
+          rendben = true;
+        }
+        else {
+          rendben = false;
+          alert('Jelölj be legalább egy anyagot!');
+        }
+
+        if (rendben && document.urlap.nev.value=='') {
+          rendben = false;
+          alert('Kérlek írd be a nevedet!');
+          document.urlap.nev.focus();
+        }
+      
+        if (rendben && !email_check()) {
+          rendben = false;
+          alert('Az e-mail cím formátuma helytelen!');
+          document.urlap.email.focus();
+        }
+
+        if (rendben && document.urlap.letolti[1].checked && document.urlap.cim.value=='') {
+          rendben = false;
+          alert('Kérlek add meg a postacímed!');
+          document.urlap.cim.focus();
+        }
+
+        if (rendben) {
+          document.urlap.submit();
+        }
+        else {
+          document.urlap.elkuld.value='Kattints ide a megrendelés elküldéséhez!';
+          document.urlap.elkuld.disabled=false;
+        }
+      
+      
+      }
+
+
+
+
+
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <div style="width:500px; height:600px; background:#E2EBFE; border:2px #330066 solid; font-family:tahoma; font-size:9pt; color:#330066; padding:20px">
+    
+      <form name="urlap" action="feldolgozo.htm" method="POST">
+
+        <br>
+        <div style="text-align:center"><font style="font-size:14pt"><b>MEGRENDELÉS</b></font></div>
+        <br><br>
+        Jelöld be azokat az anyagokat, amiket meg szeretnél rendelni! Ha CD/DVD-n kéred az anyagokat, lemezenként +500 Ft anyagköltséget számítunk fel.
+        <br><br>
+        <table style="font-family:tahoma; font-size:8pt; color:#330066" align="center" cellpadding="5" cellspacing="0" width="100%">
+          <tr style="background:#330066; color:white; font-weight:bold">
+            <td>Az anyag megnevezése</td>
+            <td align="center">Listaár</td>
+            <td align="center">Megrendelés</td>
+          </tr>
+          <tr bgcolor="white">
+            <td>Weblapok készítése a Dreamweaver használatával</td>
+            <td align="center">4500 Ft</td>
+            <td align="center"><input type="checkbox" name="dw" onClick="dijkalkulator()"></td>
+          </tr>
+          <tr bgcolor="#EEEEEE">
+            <td>PHP- és MySQL-programozás haladó szinten</td>
+            <td align="center">7400 Ft</td>
+            <td align="center"><input type="checkbox" name="php" onClick="dijkalkulator()"></td>
+          </tr>
+          <tr bgcolor="white">
+            <td>Póker kezdőknek - Texas Hold'em</td>
+            <td align="center">3700 Ft</td>
+            <td align="center"><input type="checkbox" name="poker" onClick="dijkalkulator()"></td>
+          </tr>
+          <tr bgcolor="#EEEEEE">
+            <td>Bűvésztrükkök normál kártyapakli használatával</td>
+            <td align="center">3500 Ft</td>
+            <td align="center"><input type="checkbox" name="trukk" onClick="dijkalkulator()"></td>
+          </tr>
+          <tr bgcolor="white">
+            <td>A Windows 7 operációs rendszer használata kezdőknek</td>
+            <td align="center">4100 Ft</td>
+            <td align="center"><input type="checkbox" name="win" onClick="dijkalkulator()"></td>
+          </tr>
+        </table>
+        <br><br>
+        Letöltöd az anyagokat, vagy CD/DVD-n kéred őket?
+        <br><br>
+        <input type="radio" name="letolti" value="1" checked onClick="dijkalkulator()"> letöltöm
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="letolti" value="0" onClick="dijkalkulator()"> lemezen kérem (+500 Ft/lemez)
+        <br><br><br>
+        <div style="text-align:center">
+          <font style="font-size:12pt"><b>Fizetendő összeg:</b></font>
+          <input name="fizetendo" style="font-size:14pt; color:#CA1E37; background:#E2EBFE; border:0px; width:100px; font-weight:bold" readonly value="0 Ft">
+        </div>
+        <br><br><br>
+        Kérlek add meg a megrendeléshez szükséges adataidat:
+        <br><br>
+        <table style="font-family:tahoma; font-size:8pt; color:#330066">
+          <tr>
+            <td align="right"><b>Név:</b></td>
+            <td><input name="nev" style="width:200px; font-family:tahoma; font-size:8pt; color:#330066"></td>
+          </tr>
+          <tr>
+            <td align="right"><b>e-mail:</b></td>
+            <td><input name="email" style="width:200px; font-family:tahoma; font-size:8pt; color:#330066"></td>
+          </tr>
+          <tr id="postacim" style="display:none">
+            <td align="right"><b>postacím:</b></td>
+            <td><input name="cim" style="width:350px; font-family:tahoma; font-size:8pt; color:#330066"></td>
+          </tr>
+        </table>
+        <br><br>
+
+        <input name="elkuld" type="button" value="Kattints ide a megrendelés elküldéséhez!" onClick="ellenoriz()">
+
+  
+      </form>
+
+    </div>
+
+
+  </body>
+
+</html>

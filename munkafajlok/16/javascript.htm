@@ -1,0 +1,67 @@
+﻿<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+  <head>
+    <title> JavaScript alapok </title>
+    <meta name="Generator" content="EditPlus3">
+    <meta name="Author" content="Oktatóvideók Bt. - Kovács Bence">
+    <meta name="description" content="JavaScript alapok, űrlapok manipulálása">
+    <meta name="keywords" content="HTML, weblap, javascript, űrlap, form, oktatás">
+    <meta name="robots" content="all">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script language="JavaScript">
+
+      var masodperc = 3;
+
+      function inditas() {
+        document.urlap.gomb.disabled=true;
+        document.urlap.gomb.value='kis türelmet kérek...';
+        vissza();
+      }
+
+      function vissza() {
+        if (masodperc>0) {
+          document.urlap.szamlalo.value = masodperc;
+          masodperc -= 1;
+          setTimeout('vissza()',1000);
+        }
+        else {
+          document.urlap.szamlalo.value = 'BUMMM!!!';
+          setTimeout('alaphelyzet()',2000);
+        }
+      }
+
+      function alaphelyzet() {
+        document.urlap.szamlalo.value = '';
+        document.urlap.gomb.disabled=false;
+        document.urlap.gomb.value='visszaszámlálás indítása';
+        masodperc = 3;
+      }
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <form name="urlap">
+  
+      <p align="center">
+
+        <br><br><br>
+        <input type="button" name="gomb" value="visszaszámlálás indítása" onClick="inditas()">
+        <br><br>
+
+        <input name="szamlalo" value="" style="font-size:40pt; color:#000099; font-weight:bold; border:0px; text-align:center" readonly>
+
+      </p>
+
+    </form>
+
+
+
+  </body>
+
+</html>

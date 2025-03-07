@@ -1,0 +1,69 @@
+﻿<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+  <head>
+    <title> JavaScript alapok </title>
+    <meta name="Generator" content="EditPlus3">
+    <meta name="Author" content="Oktatóvideók Bt. - Kovács Bence">
+    <meta name="description" content="JavaScript alapok, űrlapok manipulálása">
+    <meta name="keywords" content="HTML, weblap, javascript, űrlap, form, oktatás">
+    <meta name="robots" content="all">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script language="JavaScript">
+
+      function idozites() {
+        setTimeout('uzenet()',3000);
+      }
+
+      function uzenet() {
+        alert('Ez az üzenet késleltetve jelent meg.');
+      }
+
+      var masodperc = 5;
+
+      function vissza() {
+        if (masodperc>0) {
+          keret.document.write(masodperc+'<br>');
+          //masodperc = masodperc - 1;
+          masodperc -= 1;
+          setTimeout('vissza()',1000);
+        }
+        else {
+          keret.document.write('<b>BUMM!!!</b><br><br><br>');
+          masodperc = 5;
+        }
+      }
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <p align="center">
+
+      <br><br>
+      <input type="button" value="üzenet" onClick="alert('Ez az üzenet azonnal megjelenik.')">
+      <br><br>
+      <input type="button" value="késleltetett üzenet" onClick="idozites()">
+      <br><br>
+      <input type="button" value="visszaszámlálás indítása" onClick="vissza()">
+      <br><br>
+
+    </p>
+
+    <br><br>
+    <table width="50%" height="600" align="center">
+      <tr>
+        <td width="100%">
+          <iframe id="keret" name="keret" src="" width="100%" height="600" align="center" scrolling=no frameborder=0 framespacing=0 border=0 marginheight=0 marginwidth=0></iframe>
+        </td>
+      </tr>
+    </table>
+
+
+  </body>
+
+</html>
