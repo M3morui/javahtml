@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="nev">Név:</label>
+    <input type="text" id="nev">
+    <button onclick="kiirNev()">Kiírás</button>
+    <p id="nevKiiras"></p>
+
+    <label for="kor">Kor:</label>
+    <input type="text" id="kor">
+    <button onclick="EletkorEll()">Kiírás</button>
+    <p id="korell"></p>
+
+    <label for="jelszo">Jelszó:</label>
+    <input type="password" id="jelszo">
+    <label for="jelszo">Jelszó Újra:</label>
+    <input type="password" id="jelszou">
+    <button onclick="Password()">Kiírás</button>
+    <p id="pass"></p>
+
+    <form onsubmit="return ellenorzes()">
+        <label for="nev">Név:</label>
+        <input type="text" id="nevMezo">
+        <label for="nev">Ital:</label>
+        <input type="text" id="italMezo">
+        <button type="submit">Küldés</button>
+    </form>
+
+    <input type="checkbox" id="feltetelek"> Elfogadom a feltételeket
+    <button onclick="chexellenorzes()">Ellenőrzés</button>
+    <p id="checkboxEredmeny"></p>
+    <p id="uresMezoFigyelmeztetes"></p>
+
+    <label for="datum">Dátum:</label>
+    <input type="date" id="datum">
+    <button onclick="datumellenorzes()">Ellenőrzés</button>
+    <p id="datumEredmeny"></p>
+
+    <p>Melyik a kedvenc színed?</p>
+    <input type="radio" name="szin" value="Piros">Piros
+    <input type="radio" name="szin" value="Kék">Kék
+    <input type="radio" name="szin" value="Zöld">Zöld
+    <button onclick="radioellenorzes()">Ellenőrzés</button>
+    <p id="radioEredmeny"></p>
+
+    <button onclick="hozzaadMezo()">Új mező hozzáadása</button>
+    <div id="mezok"></div>
+    <script>
+        function kiirNev(){
+            var nev = document.getElementById("nev").value;
+            document.getElementById("nevKiiras").innerText = "Üdv, " + nev + "!";
+        }
+
+        function EletkorEll(){
+            var kor = document.getElementById("kor").value;
+            if (kor < 18){
+                //document.getElementById("korell").innerText = "Nem múltál el 18.";
+                alert('Nem vagy még nagykorú!')
+            }
+
+            if (kor >= 18){
+                document.getElementById("korell").innerText = "Elmúltál 18.";
+                //alert('Mehetsz bulizni!')
+            }
+        }
+
+        function Password(){
+            var jelszo = document.getElementById("jelszo").value;
+            var jelszou = document.getElementById("jelszou").value;
+            if (jelszo == jelszou){
+                document.getElementById("pass").innerText = "Sikeres.";
+                //alert('Nem vagy még nagykorú!')
+            }
+
+            if (jelszo != jelszou){
+                //document.getElementById("pass").innerText = "Sikertelen";
+                alert('Valami nem stimmel!')
+            }
+        }
+
+        function ellenorzes(){
+            var nev = document.getElementById("nevMezo").value;
+            var ital = document.getElementById("italMezo").value;
+            if(nev.trim() === "" || ital.trim() === ""){
+                document.getElementById("uresMezoFigyelmeztetes").innerText = "A név mező nem lehet üres!";
+                return false;
+            }
+            return true;
+        }
+
+        function chexellenorzes(){
+            var feltetelek = document.getElementById("feltetelek").checked;
+            if(feltetelek){
+                document.getElementById("checkboxEredmeny").innerText = "Elfogadtad a feltételeket!";
+            }
+            else{
+                document.getElementById("checkboxEredmeny").innerText = "El kell fogadnod a feltételeket";
+            }
+        }
+
+        function datumellenorzes(){
+            var datum = new Date(document.getElementById("datum").value);
+            var ma = new Date();
+            if(datum > ma){
+                document.getElementById("datumEredmeny").innerText = "A dátum nem lehet a jövőben!";
+            }
+            else{
+                document.getElementById("datumEredmeny").innerText = "A dátum érvényes";
+            }
+        }
+
+        function radioellenorzes(){
+            var szinek = document.getElementsByName("szin");
+            var kivalasztott = "";
+            for(var i = 0; i<szinek.length; i++){
+                if(szinek[i].checked){
+                    kivalasztott = szinek[i].value;
+                }
+            }
+            if(kivalasztott){
+                document.getElementById("radioEredmeny").innerText = "Kiválasztott szín:" + kivalasztott;
+            }
+            else{
+                document.getElementById("radioEredmeny").innerText = "Nem választottál színt."
+            }
+        }
+
+        function hozzaadMezo(){
+            var ujMezo = document.createElement("input");
+            ujMezo.type = "text";
+            document.getElementById("mezok").appendChild(ujMezo)
+        }
+    </script>
+    
+</body>
+</html>
