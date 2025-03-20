@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <header>
+            <h1>Kalkulátor</h1>
+        </header>
+        <div>
+            <label>Kezdő dátum</label><br>
+            <input id="inputDob" type="date" value="2003-03-20">
+        </div><br/>
+        <button type="button" onclick="getDays()">Számolj</button><br/>
+        <div id="currentAge"></div>
+
+        <script>
+            function getDays(){
+                const dobInput = document.getElementById('inputDob').value;
+                const currentDateInput = document.getElementById('cdate').value;
+                if(!dobInput || !currentDateInput){
+                    alert('Adj meg mindent');
+                    return;
+                }
+                const dob = new Date(dobInput);
+                const currentDate = new Date(currentDateInput);
+                const timeDiff = currentDate - dob;
+                const daysDiff = Math.floor(timeDiff / (1000*60*60*24));
+                document.getElementById('currentAge').textContent = '${daysDiff} nap telt el';
+            }
+        </script>
+    </div>
+</body>
+</html>
