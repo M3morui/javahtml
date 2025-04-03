@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name='terfogat' style=' width: 320px; margin:32px auto; '>
+
+
+        <input  type  = 'text'    name= 'pint'   size=5
+    
+                onFocus = 'document.terfogat.reset()'  
+                onBlur  = 'terfogat_szamol("pintből")'    > pint 
+    
+    
+        <input  type    = 'button'  value=' -> '  
+                style   = 'margin:24px;'>
+    
+    
+        <input  type    = 'text'  name= 'liter'  size=5
+                onFocus = 'document.terfogat.reset()'
+                onBlur  = 'terfogat_szamol("literből")'   > liter
+    
+    </form>
+    <script>
+        function terfogat_szamol(mibol)
+    {
+
+        pint  = parseFloat( document.terfogat.pint.value  )
+        liter = parseFloat( document.terfogat.liter.value )
+
+        if( mibol=="pintből"  && pint >0 )
+        {
+            document.terfogat.liter.value = pint  * 0.473
+        }
+
+        if( mibol=="literből" && liter>0 )
+        {
+            document.terfogat.pint.value  = liter / 0.473
+        }
+
+    }
+    </script>
+</body>
+</html>
