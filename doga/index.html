@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hosszmérték Átváltó</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+      .container {
+        background: #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+      }
+      .column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 20px;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .row input {
+        width: 80px;
+        text-align: right;
+        border: 1px solid #888;
+        background: white;
+        padding: 5px;
+      }
+      .row span {
+        margin: 0 10px;
+      }
+      .convert-button {
+        font-weight: bold;
+        cursor: pointer;
+        background: #ddd;
+        padding: 8px 15px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+    </style>
+    <script>
+      const conversionFactors = [
+        25.4, // hüvelyk -> mm
+        30.48, // láb -> cm
+        0.9144, // yard -> m
+        1.609344, // mérföld -> km
+      ];
+
+      function convertValues() {
+        const leftInputs = document.querySelectorAll(".left-column input");
+        const rightInputs = document.querySelectorAll(".right-column input");
+        leftInputs.forEach((input, index) => {
+          const value = parseFloat(input.value);
+          if (!isNaN(value)) {
+            rightInputs[index].value = (
+              value * conversionFactors[index]
+            ).toFixed(6);
+          }
+        });
+      }
+
+      function swapValues() {
+        const leftInputs = document.querySelectorAll(".left-column input");
+        const rightInputs = document.querySelectorAll(".right-column input");
+        leftInputs.forEach((input, index) => {
+          let temp = input.value;
+          input.value = rightInputs[index].value;
+          rightInputs[index].value = temp;
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="column left-column">
+        <div class="row">
+          <input type="text" value="1" oninput="convertValues()" />
+          <span>hüvelyk</span>
+        </div>
+        <div class="row">
+          <input type="text" value="1" oninput="convertValues()" />
+          <span>láb</span>
+        </div>
+        <div class="row">
+          <input type="text" value="1" oninput="convertValues()" />
+          <span>yard</span>
+        </div>
+        <div class="row">
+          <input type="text" value="1" oninput="convertValues()" />
+          <span>mérföld</span>
+        </div>
+      </div>
+      <div class="convert-button" onclick="swapValues()">
+        <span>&lt;--&gt;</span>
+      </div>
+      <div class="column right-column">
+        <div class="row">
+          <input type="text" value="25.4" readonly /> <span>mm</span>
+        </div>
+        <div class="row">
+          <input type="text" value="30.48" readonly /> <span>cm</span>
+        </div>
+        <div class="row">
+          <input type="text" value="0.9144" readonly /> <span>m</span>
+        </div>
+        <div class="row">
+          <input type="text" value="1.609344" readonly /> <span>km</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
