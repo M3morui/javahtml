@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        const masodik = () => {
+            setTimeout(() => {
+                console.log("Aszinkron Második");
+            }, 3000);           
+        };
+
+        const elso = () => {
+            console.log("Első");
+            masodik();
+            console.log("Harmadik");
+            console.log("Negyedik");
+        };
+        elso();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
