@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <title>AJAX POST példa</title>
+  <script>
+    function kuldAdatot() {
+      var xhr = new XMLHttpRequest();
+      var nev = document.getElementById("nev").value;
+      var adat = "nev=" + encodeURIComponent(nev);
+      xhr.open("POST", "feldolgozo.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          document.getElementById("valasz").innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send(adat);
+      return false; // Ne töltse újra az oldalt!
+    }
+  </script>
+</head>
+<body>
+  <form onsubmit="return kuldAdatot();">
+    Név: <input type="text" id="nev" name="nev">
+    <input type="submit" value="Küldés">
+  </form>
+  <div id="valasz"></div>
+</body>
+</html>
